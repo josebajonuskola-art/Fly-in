@@ -1,0 +1,4 @@
+2. Si no hay camino de resolucion que el programa pete
+3. Si no hay candidates que el programa pete
+4. Que no se visualizen drones en un parte sin que hayan llegado
+5. mypy y flake8
