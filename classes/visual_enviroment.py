@@ -33,6 +33,7 @@ class VisualEnv():
             and drone states.
         """
         self.simulation = simulation
+        self.occupancy: dict[str, int] = {}
         self.scale: float = 0
         self.offset_x: float = 0
         self.offset_y: float = 0
@@ -182,7 +183,8 @@ class VisualEnv():
         )
 
         hub_info = (f"{hub.name}\n Max drones: {hub.max_drones}\n"
-                    f"Drones in: {hub.drones_in}\nDistance: {hub.distance_to_goal}")
+                    f"Drones in: {self.occupancy.get(hub.name, 0)}\nDistance: "
+                    f"{hub.distance_to_goal}")
 
         self.canvas.create_text(
             p_x, p_y + 40, text=hub_info, font=("Arial", self.font_size))
@@ -289,8 +291,11 @@ class VisualEnv():
         """
 
         root = tk.Tk()
-        canvas_width = 1920
-        canvas_height = 1080
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+
+        canvas_width = int(screen_width * 0.8)
+        canvas_height = int(screen_height * 0.8)
         margin = 100
         self.canvas = tk.Canvas(
             root, width=canvas_width, height=canvas_height, bg="lightblue"
@@ -332,6 +337,13 @@ class VisualEnv():
         """
 
         self.canvas.delete("all")
+
+        self.occupancy = {}
+
+        for drone in self.simulation.drones:
+            if isinstance(drone.position, Hub):
+                name = drone.position.name
+                self.occupancy[name] = self.occupancy.get(name, 0) + 1
 
         self._create_turn_indicator()
 

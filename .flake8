@@ -1,0 +1,13 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    .env,
+    venv,
+    data,
+    subject,
+    build,
+    dist,
+    tests,
+    .mypy_cache,
+    .pytest_cache  

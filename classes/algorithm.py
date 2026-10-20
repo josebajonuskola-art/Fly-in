@@ -113,7 +113,7 @@ class Algorithm():
     def candidate_cleaner(self, candidates: list[Hub]) -> list[Hub]:
         """Filters candidates to keep only hubs reachable from the goal.
         Args: candidates: Hubs connected to the current hub.
-        Returns: A list containing only candidates with a valid 
+        Returns: A list containing only candidates with a valid
         distance to the goal. """
 
         new_candidates: list[Hub] = []
@@ -123,7 +123,6 @@ class Algorithm():
                 new_candidates.append(candidate)
 
         return new_candidates
-
 
     def path_solver(self) -> list[Hub | Connection]:
         """Calculates and constructs the optimal route from start hub to
